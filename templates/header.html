@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'
+            async></script>
+
+
+    <style>
+        {% comment %}
+        h1,
+        .navbar-brand,
+        .navbar-nav a{
+            font-family: 'Montserrat Light', sans-serif;
+        }{% endcomment %}
+
+        .btn-space {
+            margin-right: 5px;
+        }
+    </style>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="/"> <b>Probabilidad y Estadistica</b></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Distribución de probabilidad continua
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="probabilidad-continua">Calculo de probabilidad P(a < X < b)</a>
+                        <a class="dropdown-item" href="funcion-acumulativa-continua">Función de distribución acumulativa
+                            F(x)</a>
+                        <a class="dropdown-item" href="valor-esperado-continua">Valor esperado E(X)</a>
+                        <a class="dropdown-item" href="varianza-continua">Varianza</a>
+                    </div>
+
+
+                </li>
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Distribución de probabilidad conjunta (Continua)
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="probabilidad-distribucion-conjunta">Calculo de probabilidad P(a <
+                            X < b, c < Y < d )</a>
+                        <a class="dropdown-item" href="distribucion-probabilidad-conjunta">Calculo de distribuciones
+                            marginales, valor esperado y covarianza</a>
+                    </div>
+
+
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="probabilidad-conjunta"></a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <button type="button" class="btn btn-primary btn-space" data-toggle="modal" data-target="#myModal">
+                    Instrucciones
+                </button>
+                <a href="http://ingenieria.aragon.unam.mx/" class="btn btn-info btn-space" role="button">FES Aragón
+                    ICO</a>
+            </form>
+        </div>
+    </nav>
+
+    <div class="modal" id="myModal">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Instrucciones de uso</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        A continuación nombraremos las reglas principales para el uso de este proyecto: <br>
+                            1. Indicar explicitamente el producto de los terminos.
+                                Por ejemplo: (1/2)xy = (1/2)*x*y <br>
+                            2. La potencia de cualquier termino es con (**).
+                                Por ejemplo: x^3 = x**3 <br>
+                            3. La raiz cuadrada de cualquier termino es con sqrt(x).
+                                Ejemplo: sqrt(21) <br>
+                            4. El valor de las funciones trigonometricos es evaluada en radianes.
+                                Ejemplo: sin(pi) = 0. <b>Nota</b>: Es necesario escribir sin(x) para calcular el seno.<br>
+                            5. Para calcular el logaritmo natural de un termino es necesario usar ln(x) y
+                                si se desea calcular el logaritmo en otra base es necesario usar log(x, base).<br>
+                            6. Para usar el valor de Pi solo es necesario escribir pi.<br>
+                            7. Para usar el valor de e (constante de Euler) es necesario escribir
+                                el exponente del mismo en exp(x).<br>
+                        <br>
+                        <b>Nota:</b> Es necesario colocar correctamente los intervalos de integración, es decir, que el
+                            limite inferior sea menor que el limite superior. En cualquier caso, el sistema le avisara de algun
+                            error.<br>
+                        <br>
+                        <b>Importante:</b> Las opciones que soliciten f(x,y) permitiran funciones que contienen x y y, mientras que
+                            una opcion que solicite f(x) solo aceptara funciones dependientes de x y el ingreso de otro tipo de función
+                            ocasionara un error.
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    {% block head %}
+
+    {% endblock %}
+</head>
+
+<body style="background-color:rgb(243,243,243);">
+
+
+{% block body %}
+
+{% endblock %}
+
+
+{% comment %}    <footer>
+
+                <!-- Footer -->
+        <footer class="page-footer font-small blue fixed-bottom">
+
+          <!-- Copyright -->
+          <div class="footer-copyright text-center py-3">© 2019
+            <a href="http://ingenieria.aragon.unam.mx"> FES Aragón - ICO</a>
+          </div>
+          <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+    </footer>{% endcomment %}
+</body>
+
+</html>

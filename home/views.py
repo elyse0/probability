@@ -228,8 +228,10 @@ class ProbabilidadDensidadConjuntaView(TemplateView):
                                              + latex(probabilidadSuperiorY) + ") = "
 
                         stringProbabilidad, valorProbabilidad = getDoubleIntegral(ecuacion, x,
-                                                                                  limiteInferiorX, limiteSuperiorX, y,
-                                                                                  limiteInferiorY, limiteSuperiorY, text)
+                                                                                  probabilidadInferiorX,
+                                                                                  probabilidadSuperiorX, y,
+                                                                                  probabilidadInferiorY,
+                                                                                  probabilidadSuperiorY, text)
 
             return render(request, self.template, {'ecuacion': EcuacionForm(request.POST),
                                                    'limiteInferiorX': LimiteInferiorXForm(request.POST),
@@ -280,7 +282,7 @@ class ProbabilidadContinuaView(TemplateView):
 
     def post(self, request):
 
-        msgDistribucion = "Distribución de probabilidad continua"
+        msgDistribucion = ""
         msgProbabilidad = ""
         stringIntegral = ""
 
@@ -307,6 +309,7 @@ class ProbabilidadContinuaView(TemplateView):
 
             if (N(limiteInferior, 3) <= N(limiteSuperior, 3)):
 
+                msgDistribucion = "Distribución de probabilidad"
                 errorMessage += 1
 
                 if (N(valorIntegral, 2) > 0.99 and N(valorIntegral, 4) < 1.01):
@@ -367,7 +370,7 @@ class AcomulativaContinuaView(TemplateView):
 
     def post(self, request):
 
-        msgDistribucion = "Distribución de probabilidad"
+        msgDistribucion = ""
         msgProbabilidad = ""
         stringIntegral = ""
         stringProbabilidad = ""
@@ -395,6 +398,7 @@ class AcomulativaContinuaView(TemplateView):
 
                 if (N(valorIntegral, 2) > 0.99 and N(valorIntegral, 4) < 1.01):
 
+                    msgDistribucion = "Distribución de probabilidad"
                     # Evaluacion de los limites de probabilidad
                     errorMessage += 1
 
@@ -449,6 +453,9 @@ class EsperadoContinuaView(TemplateView):
         limiteInferior = LimiteInferiorForm(request.POST)
         limiteSuperior = LimiteSuperiorForm(request.POST)
 
+        stringIntegral = ""
+        msgDistribucion = ""
+
         try:
 
             x = symbols('x')
@@ -459,7 +466,6 @@ class EsperadoContinuaView(TemplateView):
             valorLimiteSuperior = sympify(limiteSuperior['limiteSuperior'].value())
 
             msgValorEsperado = ""
-            msgDistribucion = ""
             stringValorEsperado = ""
 
             # String y valor de la funcion ingresada
@@ -472,13 +478,13 @@ class EsperadoContinuaView(TemplateView):
 
             if (N(valorLimiteInferior, 3) <= N(valorLimiteSuperior, 3)):
 
+                msgDistribucion = "Distribución de probabilidad"
                 # Evaluación de distribución de probabilidad
                 errorMessage += 1
 
                 if (N(valorIntegral, 2) > 0.99 and N(valorIntegral, 4) < 1.01):
                     errorMessage = 0
                     msgValorEsperado = "Valor Esperado E(X)"
-                    msgDistribucion = "Distribución de probabilidad"
 
                     stringValorEsperado, valorEsperado = getSimpleIntegral("x * " + valorEcuacion,
                                                                            x, valorLimiteInferior,
@@ -518,7 +524,7 @@ class VarianzaContinuaView(TemplateView):
 
     def post(self, request):
 
-        msgDistribucion = "Distribución de probabilidad"
+        msgDistribucion = ""
         msgProbabilidad = ""
         stringIntegral = ""
         stringProbabilidad = ""
@@ -540,9 +546,11 @@ class VarianzaContinuaView(TemplateView):
 
             if (N(limiteInferior, 3) <= N(limiteSuperior, 3)):
 
+                msgDistribucion = "Distribución de probabilidad"
                 errorMessage += 1
 
                 if (N(valorIntegral, 2) > 0.99 and N(valorIntegral, 4) < 1.01):
+                    errorMessage = 0
                     msgProbabilidad = "Varianza"
                     valorEsperadoX = integrate("x * " + ecuacion,
                                                (x, limiteInferior, limiteSuperior))

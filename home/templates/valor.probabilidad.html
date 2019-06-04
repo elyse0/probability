@@ -1,0 +1,64 @@
+{% extends 'header.html' %}
+
+{% block head %}
+
+    <title>Distribución de probabilidad conjunta (Continua)</title>
+
+    <div class="container" align="middle">
+
+        <div class="jumbotron">
+
+            <h1>Distribución de probabilidad conjunta (Continua)</h1>
+            <h3>Probabilidad P(a < X < b, c < Y < d)</h3>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-5">
+
+                <form method="post">
+
+                    {% csrf_token %}
+                    {{ ecuacion.as_p }}
+                    {{ limiteInferiorX.as_p }}
+                    {{ limiteSuperiorX.as_p }}
+                    {{ limiteInferiorY.as_p }}
+                    {{ limiteSuperiorY.as_p }}
+
+                    <p>P(a < X < b, c < Y < d)</p>
+
+                    {{ probabilidadInferiorX.as_p }}
+                    {{ probabilidadSuperiorX.as_p }}
+                    {{ probabilidadInferiorY.as_p }}
+                    {{ probabilidadSuperiorY.as_p }}
+
+                    <input class="btn btn-primary" type="submit" value="Calcular">
+                </form>
+                <br>
+
+                <div id="mydiv"></div>
+
+            </div>
+
+            <div class="col-md-7">
+
+                {{ msgDistribucion }}
+
+                $${{ stringIntegral }}$$
+
+                {{ errorMessage }}
+
+                {{ msgProbabilidad }}
+
+                $${{ stringProbabilidad }}$$
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
